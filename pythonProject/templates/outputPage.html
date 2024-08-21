@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<image  style="float:right" src="{{url_for('static', filename='img/pic.png')}}"></image>
+<body style="background-color: #D3D3D3">
+    <h3 style="font-family: Times New Roman; font-size 20px"> What is our rating?...</h3>
+    <h3 style="font-family: Times New Roman; font-size 20px;"> We rated your stock {{rating}} out of 100.
+    Meaning we {{recommendation}} investing in this stock. </h3>
+    <p style="font-family: Times New Roman; font-size 20px;">Reasoning...</p>
+    <ul style="font-family: Times New Roman">
+        {% for i in explanation %}
+        <li style="width: 800px"> {{i}} </li>
+        {% endfor %}
+    </ul>
+    <p style="font-family: Times New Roman; font-size 20px float:bottom"> Certified A&A Quant Stock Recommendations</p>
+
+
+
+
+
+</body>
+</html>

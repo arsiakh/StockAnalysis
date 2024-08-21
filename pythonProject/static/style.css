@@ -1,0 +1,13 @@
+h1 {
+font-size: 30px;
+text-align: center;
+}
+p {
+display:flex;
+align-items: center;
+justify-content: center;
+
+}
+body {
+background-color: #D3D3D3
+}
