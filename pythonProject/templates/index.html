@@ -1,16 +1,57 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title> Home page</title>
-    </head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A&A Quant Stock Recommendations</title>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
-    <body>
-        <h1>A&A Quant Stock Recommendations</h1>
-        <form action = "#" method = "POST">
-            <p style="font-family: Times New Roman"> Input Ticker Code: <input type = "text" name = "ticker"/></p>
-            <p style="font-family: Times New Roman"> Input Start Date: <input type = "date" name = "start"  /></p>
-            <p style="font-family: Times New Roman"> Input End Date: <input type = "date" name = "end"><input type = "submit" value = "Submit" /></p>
-
-        </form>
-    </body>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Stock Analysis</h1>
+            <p class="subtitle">Fundamental ratio analysis</p>
+        </header>
+        
+        <main>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-message flash-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            <form action="#" method="POST" class="stock-form">
+                <div class="form-group">
+                    <label for="ticker">Stock Ticker Symbol</label>
+                    <input type="text" id="ticker" name="ticker" placeholder="e.g., AAPL, MSFT, GOOGL" required>
+                    <small>Enter the stock ticker symbol (e.g., AAPL for Apple)</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="start">Start Date</label>
+                    <input type="date" id="start" name="start" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="end">End Date</label>
+                    <input type="date" id="end" name="end" required>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <span>Analyze Stock</span>
+                </button>
+            </form>
+        </main>
+        
+        <footer>
+            <p>Data provided by Yahoo Finance</p>
+        </footer>
+    </div>
+</body>
 </html>

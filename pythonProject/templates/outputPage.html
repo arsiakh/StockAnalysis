@@ -1,23 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Analysis Results - A&A Quant</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
 </head>
-<image  style="float:right" src="{{url_for('static', filename='img/pic.png')}}"></image>
-<body style="background-color: #D3D3D3">
-    <h3 style="font-family: Times New Roman; font-size 20px"> What is our rating?...</h3>
-    <h3 style="font-family: Times New Roman; font-size 20px;"> We rated your stock {{rating}} out of 100.
-    Meaning we {{recommendation}} investing in this stock. </h3>
-    <p style="font-family: Times New Roman; font-size 20px;">Reasoning...</p>
-    <ul style="font-family: Times New Roman">
-        {% for i in explanation %}
-        <li style="width: 800px"> {{i}} </li>
-        {% endfor %}
-    </ul>
-    <p style="font-family: Times New Roman; font-size 20px float:bottom"> Certified A&A Quant Stock Recommendations</p>
-
-
-
-
-
+<body>
+    <div class="container">
+        <header>
+            <h1>Analysis Results</h1>
+            <a href="{{ url_for('home') }}" class="back-btn">← New Analysis</a>
+        </header>
+        
+        <main class="results-main">
+            <div class="results-grid">
+                <div class="rating-card">
+                    <h2>Overall Rating</h2>
+                    <div class="rating-display">
+                        <span class="rating-value">{{ rating }}</span>
+                        <span class="rating-max">/ 100</span>
+                    </div>
+                    <div class="rating-bar">
+                        <div class="rating-fill" style="--rating-width: {{ rating|default(0)|float }}%; width: var(--rating-width);"></div>
+                    </div>
+                    <p class="recommendation-text">
+                        We <strong>{{ recommendation }}</strong> investing in this stock.
+                    </p>
+                </div>
+                
+                <div class="chart-card">
+                    <h2>Price Chart</h2>
+                    <img src="{{url_for('static', filename='img/pic.png')}}" alt="Stock Price Chart" class="stock-chart">
+                </div>
+            </div>
+            
+            <div class="explanation-section">
+                <h2>Analysis Details</h2>
+                <div class="explanation-list">
+                    {% if explanation %}
+                        {% for item in explanation %}
+                            <div class="explanation-item">
+                                <p>{{ item }}</p>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-data">No detailed analysis available for this stock.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Data provided by Yahoo Finance</p>
+        </footer>
+    </div>
 </body>
 </html>
