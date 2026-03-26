@@ -31,7 +31,7 @@ body {
 }
 
 .container {
-    max-width: 900px;
+    max-width: 1400px;
     margin: 0 auto;
     background: var(--card-bg);
     border-radius: 8px;
@@ -181,6 +181,24 @@ main {
     padding: 2rem;
 }
 
+.results-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+}
+
 .results-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -267,7 +285,7 @@ main {
 
 /* Explanation Section */
 .explanation-section {
-    margin-top: 1.5rem;
+    margin-top: 0;
 }
 
 .explanation-section h2 {
@@ -336,6 +354,10 @@ footer {
         padding: 1.5rem;
     }
     
+    .results-layout {
+        grid-template-columns: 1fr;
+    }
+
     .results-grid {
         grid-template-columns: 1fr;
     }

@@ -384,7 +384,7 @@ class Stocks:
             if out_dir:
                 os.makedirs(out_dir, exist_ok=True)
 
-            plt.figure(figsize=(10, 6))
+            plt.figure(figsize=(14, 8))
             plt.plot(self.history1["Close"])
             plt.ylabel("Closing Price (USD$)")
             plt.xlabel("Date")
@@ -392,7 +392,7 @@ class Stocks:
             plt.grid(True, alpha=0.3)
             plt.xticks(rotation=45, ha='right')
             plt.tight_layout()
-            plt.savefig(out_path, dpi=100, bbox_inches="tight")
+            plt.savefig(out_path, dpi=150, bbox_inches="tight")
             plt.close()
         except Exception as e:
             print(f"Warning: Could not generate graph: {str(e)}")

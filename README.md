@@ -3,75 +3,93 @@
 A Flask-based web application for analyzing stocks using financial ratios and providing investment recommendations.
 
 ## Requirements
-- Python 3.10+ (Python 3.13 works)
+- Python 3.10+
 - pip
 
-## Setup + Manual Run
+## Setup
 
-### 1: Clone the repo and enter the project folder
+### 1. Clone the repo and enter the project folder
 ```bash
 git clone <YOUR_REPO_URL>
 cd StockAnalysis
-
-# Create virtual environment (if not already created)
-python3 -m venv venv
-
-# Activate virtual environment
-source venv/bin/activate
 ```
 
-### 2. Install Dependencies
+### 2. Create and activate a virtual environment
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
+### 3. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Run the Application
-
-**Option B: Manual run**
+### 4. Run the application
 ```bash
-# Make sure you're in the project root directory
-# Activate virtual environment
-source venv/bin/activate
-
-# Navigate to pythonProject and run
-cd pythonProject
-python main.py
+python3 pythonProject/main.py
 ```
 
-### 4. Access the Application
+### 5. Open in your browser
 
-Once the server starts, open your web browser and navigate to:
+**http://127.0.0.1:5000**
 
-**http://127.0.0.1:5000** or **http://localhost:5000**
-
-You should see the stock analysis form where you can:
+You can:
 - Enter a stock ticker symbol (e.g., AAPL, MSFT, GOOGL)
-- Select a start date
-- Select an end date
-- Click "Analyze Stock" to get recommendations
+- Select a start and end date
+- Click "Analyze Stock" to get a recommendation and price chart
+
+## Running Tests
+
+Tests are written with `pytest` and cover the `Stocks` class and all Flask routes.
+
+```bash
+# Activate virtual environment first
+source .venv/bin/activate
+
+# Run all tests with coverage report
+python3 -m pytest -v --tb=short --cov=pythonProject --cov-report=term-missing
+```
+
+To run specific test files:
+```bash
+# Stocks class logic only
+python3 -m pytest pythonProject/test_program1.py -v
+
+# Flask routes only
+python3 -m pytest pythonProject/test_main.py -v
+```
+
+To generate an HTML coverage report:
+```bash
+python3 -m pytest --cov=pythonProject --cov-report=html
+# Then open htmlcov/index.html in your browser
+```
 
 ## Project Structure
 
 ```
 StockAnalysis/
 ├── pythonProject/
-│   ├── main.py              # Flask application entry point
-│   ├── program1.py          # Backend stock analysis logic
-│   ├── templates/           # HTML templates
-│   │   ├── index.html
-│   │   └── outputPage.html
-│   └── static/              # Static files (CSS/images)
-│       ├── style.css
-│       └── img/             # Generated charts
-├── requirements.txt         # Python dependencies
+│   ├── main.py                # Flask application entry point
+│   ├── program1.py            # Stock analysis logic (Stocks class)
+│   ├── test_program1.py       # Unit tests for Stocks class
+│   ├── test_main.py           # Unit tests for Flask routes
+│   ├── templates/
+│   │   ├── index.html         # Input form page
+│   │   └── outputPage.html    # Results page
+│   └── static/
+│       ├── style.css          # Stylesheet
+│       └── img/               # Generated chart (created at runtime)
+├── pytest.ini                 # Pytest configuration
+├── requirements.txt           # Python dependencies
+├── .gitignore
 └── README.md
-
 ```
 
 ## Features
 
-- **Financial Ratio Analysis**: Analyzes 6 key financial ratios:
+- **Financial Ratio Analysis** — analyzes 6 key financial ratios:
   - PE Ratio (Price-to-Earnings)
   - EPS (Earnings Per Share)
   - ROE (Return on Equity)
@@ -79,20 +97,23 @@ StockAnalysis/
   - Quick Ratio
   - PEG Ratio (Price/Earnings to Growth)
 
-- **Investment Recommendations**: Provides ratings from 0-100 with investment recommendations
-- **Price Charts**: Displays historical stock price charts
-- **Modern UI**: Responsive design with modern styling
+- **Investment Recommendations** — 0–100 rating with one of:
+  - Strongly Don't Recommend
+  - Don't Recommend
+  - Neutral
+  - Recommend
+  - Strongly Recommend
+
+- **Price Charts** — historical closing price chart for your selected date range
+- **Modern UI** — responsive side-by-side layout
 
 ## Troubleshooting
 
-If you encounter import errors, make sure:
-1. You're running from the correct directory
-2. PYTHONPATH includes the project root directory
-3. Virtual environment is activated
-4. All dependencies are installed
+- Make sure your virtual environment is activated (`source .venv/bin/activate`) before running the app or tests
+- If a stock has missing financial data, some ratios will be skipped and the rating will reflect only the available data
+- The app runs in debug mode by default — do not use this in production
 
 ## Notes
 
-- The application uses yfinance to fetch real-time stock data
-- Some stocks may have incomplete financial data
-- The analysis is for educational purposes only
+- Stock data is fetched live from Yahoo Finance via `yfinance`
+- This application is for educational purposes only and is not financial advice

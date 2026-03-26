@@ -1,0 +1,25 @@
+# Virtual environments
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Test & coverage artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Generated chart (auto-created at runtime)
+pythonProject/static/img/pic.png
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
